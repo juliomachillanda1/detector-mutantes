@@ -1,23 +1,43 @@
 package com.juliomachillanda.detectormutantes.service;
 
+import com.juliomachillanda.detectormutantes.domain.AdnVerificacion;
+import com.juliomachillanda.detectormutantes.repository.AdnVerificacionRepository;
+import java.util.Optional;
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class AdnVerificacionService {
 
     private static final String[] SECUENCIAS = {"AAAA", "TTTT", "CCCC", "GGGG"};
 
-    public boolean isMutant(String[] dna) {
-        char[][] basesNitrogenadas = obtenerBasesNitrogenadas(dna);
+    @Autowired
+    AdnVerificacionRepository adnVerificacionRepository;
 
-        int secuenciasEncontradas = 0;
-        for (String secuencia : SECUENCIAS) {
-            secuenciasEncontradas += buscarSecuencias(basesNitrogenadas, secuencia);
-            if (secuenciasEncontradas > 1) {
-                return true;
+    public boolean isMutant(String[] dna) {
+        Optional<AdnVerificacion> verificacion = adnVerificacionRepository.findByAdn(dna);
+
+        if (verificacion.isPresent()) {
+            return verificacion.get().esMutante();
+        } else {
+            AdnVerificacion nuevaVerificacion = new AdnVerificacion();
+            nuevaVerificacion.setAdn(dna);
+            adnVerificacionRepository.save(nuevaVerificacion);
+
+            char[][] basesNitrogenadas = obtenerBasesNitrogenadas(dna);
+
+            int secuenciasEncontradas = 0;
+            for (String secuencia : SECUENCIAS) {
+                if (secuenciasEncontradas > 1) {
+                    nuevaVerificacion.setEsMutante(true);
+                    return true;
+                }
+                secuenciasEncontradas += buscarSecuencias(basesNitrogenadas, secuencia);
             }
+            return false;
         }
-        return false;
     }
 
     private char[][] obtenerBasesNitrogenadas(String[] adn) {
