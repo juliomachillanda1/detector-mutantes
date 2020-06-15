@@ -91,4 +91,4 @@ Retorna la cantidad de correspondiente de mutantes y humanos encontrados en las 
 
 > Para probar con Postman se puede hacer click en el siguiente link e importar la colección.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9bf65527e52237dd79e4)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7ea7b3d3f2f6e0cbc734)
