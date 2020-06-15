@@ -1,12 +1,34 @@
 package com.juliomachillanda.detectormutantes.domain;
 
+import com.juliomachillanda.detectormutantes.vo.AdnVerificacionEstadisticasVo;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
+@SqlResultSetMapping(
+        name = "estadisticasVerificacionesMapping",
+        classes = {
+            @ConstructorResult(
+                    targetClass = AdnVerificacionEstadisticasVo.class,
+                    columns = {
+                        @ColumnResult(name = "cantidadMutantes"),
+                        @ColumnResult(name = "cantidadHumanos"),
+                        @ColumnResult(name = "proporcionMutantes")}
+            )
+        }
+)
 
+@NamedNativeQuery(name = "AdnVerificacion.buscarEstadisticasVerificaciones", query = "SELECT"
+        + " COUNT(CASE WHEN es_mutante = true THEN 1 END) AS cantidadMutantes,"
+        + " COUNT(CASE WHEN es_mutante = false THEN 1 END) AS cantidadHumanos,"
+        + " CAST(COUNT(CASE WHEN es_mutante = true THEN 1 END) AS FLOAT)/COUNT(*) AS proporcionMutantes"
+        + " FROM adn_verificacion;", resultSetMapping = "estadisticasVerificacionesMapping")
 
 @Entity
 @Table(name = "adn_verificacion")

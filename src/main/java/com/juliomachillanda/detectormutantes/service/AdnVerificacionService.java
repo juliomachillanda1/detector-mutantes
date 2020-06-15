@@ -2,6 +2,7 @@ package com.juliomachillanda.detectormutantes.service;
 
 import com.juliomachillanda.detectormutantes.domain.AdnVerificacion;
 import com.juliomachillanda.detectormutantes.repository.AdnVerificacionRepository;
+import com.juliomachillanda.detectormutantes.vo.AdnVerificacionEstadisticasVo;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,10 @@ public class AdnVerificacionService {
             }
             return false;
         }
+    }
+
+    public AdnVerificacionEstadisticasVo buscarEstadisticasVerificaciones() {
+        return adnVerificacionRepository.buscarEstadisticasVerificaciones();
     }
 
     private char[][] obtenerBasesNitrogenadas(String[] adn) {
