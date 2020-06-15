@@ -31,11 +31,11 @@ public class AdnVerificacionService {
 
             int secuenciasEncontradas = 0;
             for (String secuencia : SECUENCIAS) {
+                secuenciasEncontradas += buscarSecuencias(basesNitrogenadas, secuencia);
                 if (secuenciasEncontradas > 1) {
                     nuevaVerificacion.setEsMutante(true);
                     return true;
                 }
-                secuenciasEncontradas += buscarSecuencias(basesNitrogenadas, secuencia);
             }
             return false;
         }
