@@ -68,7 +68,7 @@ Un humano es mutante, si encuentra más de una secuencia de cuatro letras iguale
 
 **Ver estadísticas de verificaciones de ADN**
 ----
-Retorna un Json con la cantidad de correspondiente de mutantes y humans encontrados en las verificaciones de ADN. Además la proporción de mutantes en base a las verificaciones hechas.
+Retorna la cantidad de correspondiente de mutantes y humanos encontrados en las verificaciones de ADN. Además la proporción de mutantes en base a las verificaciones realizadas.
 
 * **Endpoint:**
 
@@ -89,6 +89,6 @@ Retorna un Json con la cantidad de correspondiente de mutantes y humans encontra
     }
     ```
 
->Para probar con Postman se puede hacer click en el siguiente link e importar la colección.
+> Para probar con Postman se puede hacer click en el siguiente link e importar la colección.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9bf65527e52237dd79e4)
