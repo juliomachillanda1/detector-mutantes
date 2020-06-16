@@ -16,6 +16,7 @@ $ mvn spring-boot:run
 ```
 
 # Servicios REST
+Se encuentra actualmente hosteado en la siguiente URL: https://detector-mutantes.herokuapp.com/
 
 **Detectar si un humano es mutante**
 ----
